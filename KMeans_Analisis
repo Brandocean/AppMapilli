@@ -1,0 +1,86 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+
+#importar tabla de excel
+tabla=pd.read_excel("ZZ.xlsx")
+
+#print(tabla)
+
+#Transformar ubicacion en dato cuantitativo
+
+tablaUbi=tabla['UBICACION']
+tablaUbi2=[]
+for i in tablaUbi:
+    if i == 'TEPOZ':
+        tablaUbi2.append(1)
+    elif i == 'Machu_Picchu':
+        tablaUbi2.append(2)
+    elif i == 'Tlatlauquitepec ':
+        tablaUbi2.append(3)
+    elif i == 'Mitla ':
+        tablaUbi2.append(4)
+    elif i == 'Dolores_Hidalgo':
+        tablaUbi2.append(5)
+
+#Primera Gráfica
+
+Data={'x': tablaUbi2,'y': tabla['MES']}
+
+df=pd.DataFrame(Data,columns=['x','y'])
+
+kmeans=KMeans(n_clusters=3).fit(df)
+centroids=kmeans.cluster_centers_
+print(centroids)
+
+ax=plt.subplot(221)
+
+plt.xlabel("UBICACION")
+plt.ylabel("MES")
+plt.title("UBICACION VS MES")
+
+plt.scatter(df['x'], df['y'], c=kmeans.labels_.astype(float), s=50, alpha=0.5)
+plt.scatter(centroids[:,0],centroids[:,1],c="red",s=50)
+
+
+#Segunda Gráfica
+
+ax2=plt.subplot(222)
+
+Data2={'x': tablaUbi2,'y': tabla['TIEMPO']}
+
+df2=pd.DataFrame(Data2,columns=['x','y'])
+
+kmeans=KMeans(n_clusters=3).fit(df2)
+centroids=kmeans.cluster_centers_
+print(centroids)
+
+plt.xlabel("UBICACION")
+plt.ylabel("TIEMPO")
+plt.title("UBICACION VS TIEMPO")
+
+plt.scatter(df2['x'], df2['y'], c=kmeans.labels_.astype(float), s=50, alpha=0.5)
+plt.scatter(centroids[:,0],centroids[:,1],c="red",s=50)
+
+
+#Tercera gráfica
+
+ax3=plt.subplot(223)
+
+Data3={'x': tablaUbi2,'y': tabla['PERSONAS']}
+
+df3=pd.DataFrame(Data3,columns=['x','y'])
+
+kmeans=KMeans(n_clusters=3).fit(df3)
+centroids=kmeans.cluster_centers_
+print(centroids)
+
+plt.xlabel("UBICACION")
+plt.ylabel("PERSONAS")
+plt.title("UBICACION VS PERSONAS")
+
+plt.scatter(df3['x'], df3['y'], c=kmeans.labels_.astype(float), s=50, alpha=0.5)
+plt.scatter(centroids[:,0],centroids[:,1],c="red",s=50)
+
+
+plt.show()
