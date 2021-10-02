@@ -31,6 +31,7 @@ df=pd.DataFrame(Data,columns=['x','y'])
 
 kmeans=KMeans(n_clusters=3).fit(df)
 centroids=kmeans.cluster_centers_
+print("Centroides de la primera gráfica \n")
 print(centroids)
 
 ax=plt.subplot(221)
@@ -53,6 +54,7 @@ df2=pd.DataFrame(Data2,columns=['x','y'])
 
 kmeans=KMeans(n_clusters=3).fit(df2)
 centroids=kmeans.cluster_centers_
+print("\n Centroides de la segunda gráfica \n")
 print(centroids)
 
 plt.xlabel("UBICACION")
@@ -73,6 +75,7 @@ df3=pd.DataFrame(Data3,columns=['x','y'])
 
 kmeans=KMeans(n_clusters=3).fit(df3)
 centroids=kmeans.cluster_centers_
+print("\n Centroides de la tercera gráfica \n")
 print(centroids)
 
 plt.xlabel("UBICACION")
